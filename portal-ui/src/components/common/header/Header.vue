@@ -2,26 +2,26 @@
 	<div class="header-wrapper" >
 		<div class="header">
 			<div class="header-left">
-				<img src="../../../assets/images/logo.png" alt="">
+				<img src="../../../assets/images/index/log.jpg" alt="">
 			</div>
 			<div class="header-mid">
 				<div class="header-item">
 					<i style="color:#7c6aa6" class="contact-icon am-icon-phone"></i>
 					<div class="item">
-						<strong>15284734573</strong>
+						<strong>13078164038</strong>
 						<span>周一 ~ 周五, 8:30 - 17:30</span>
 					</div>
 				</div>
 				<div class="header-item">
 					<i style="color:#7c6aa6" class="contact-icon am-icon-map-marker"></i>
 					<div class="item">
-						<strong>四川省成都市高新区</strong>
-						<span>四川XXXX有限公司</span>
+						<strong>广东省佛山市南海区</strong>
+						<span>佛山钟潭装饰工程有限公司</span>
 					</div>
 				</div>
 			</div>
 			<div class="header-right">
-				<a href="tel:+18583266628" class="">
+				<a href="tel:+17734792020" class="">
 					<button type="button" >联系我们</button>
 				</a>
 			</div>

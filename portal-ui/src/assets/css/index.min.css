@@ -1,6 +1,12 @@
 .index-page {
-    width: 100%;
-    border-bottom: 1px solid #e9e9e9
+    position: relative; /* 确保子元素定位相对于背景图 */
+    background: url('../images/product/abouthostorybg.jpg') no-repeat center center;
+    background-size: cover;
+    color: #1a2b25;
+    padding-bottom: 680px;
+
+    /*width: 100%;*/
+    /*border-bottom: 1px solid #e9e9e9*/
 }
 
 .index-page div[class^=am-tab-pane] {
@@ -11,17 +17,17 @@
     margin: 0
 }
 
-.index-page .index-banner {
+/*.index-page .index-banner {
     width: 100%;
     height: 498px;
     background-size: cover
-}
+}*/
 
 .index-page .index-banner .index-mask {
     height: 100%;
     background: rgba(0, 0, 0, .5);
     text-align: center;
-    color: #fff;
+    color: #1a2b25;
     padding: 140px 0 0
 }
 

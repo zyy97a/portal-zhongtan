@@ -60,11 +60,11 @@ export default {
 			tabIndex: 0,
 			tabList:[
 				{id:1,name:'主要案例',icon:'am-icon-map-o'},
-				{id:1,name:'客户案例一',icon:'am-icon-scribd'},
-				{id:1,name:'客户案例二',icon:'am-icon-odnoklassniki'},
-				{id:1,name:'客户案例三',icon:'am-icon-building-o'},
-				{id:1,name:'客户案例四',icon:'am-icon-hand-scissors-o'},
-				{id:1,name:'客户案例五',icon:'am-icon-camera'},
+				{id:1,name:'政府案例',icon:'am-icon-scribd'},
+				{id:1,name:'商业办公案例',icon:'am-icon-odnoklassniki'},
+				{id:1,name:'公共服务案例',icon:'am-icon-building-o'},
+				{id:1,name:'房地产案例',icon:'am-icon-hand-scissors-o'},
+				{id:1,name:'教育案例',icon:'am-icon-camera'},
 			],
 			list:[],
 		}

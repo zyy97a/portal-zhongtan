@@ -5,8 +5,8 @@
 		<div class="layout-container" style="width: 100%">
 			<div class="solution-page">
 				<div class="container" style="text-align: center">
-					<h2>自主创新跨平台企业级解决方案</h2>
-					<p>光明网曾考虑过通过原生App来实现移动化，但是由于无法复用原始业务流程和数据就放弃了，直到选用了云适配整体解决方案后，可以很方便的在Enterplorer上使用一个帐号登录我们的系统，通过VPN随时进入内网。</p>
+					<h2>您可靠的招牌专家</h2>
+					<p>钟潭熟悉每种制作材料和制作工艺，擅长叠加使用放大您的品牌优势。大华坚持定制化原则，倾听您的需求，在任何时候都能给你提供专业的招牌和金属制品的意见和帮助，创建符合您期望要求的品牌标志。</p>
 				</div>
 			</div>
 		</div>
@@ -24,9 +24,9 @@
 		<div class="section">
 			<div class="container" style="max-width: 1160px">
 				<div class="section--header">
-					<h2 class="section--title">解决方案案例展示</h2>
+					<h2 class="section--title">产品介绍</h2>
 					<p class="section--description">
-						全球独创专利技术：一行代码部署，帮助企业快速安全地将现有PC版网页适配成HTML5跨屏网页，跨平台的企业统一办公 门户，快捷的移动适配开发能力，完备的数据安全保护
+            我们是一家专业从事广告招牌设计与制作的工厂，提供多元化的产品和服务，满足客户的各种需求。以下是我们的主要产品介绍
 					</p>
 				</div>
 				

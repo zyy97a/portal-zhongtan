@@ -3,7 +3,7 @@
 }
 
 .about-container .our-company-text {
-    padding: 4px 45px 0 0
+    padding: 1px 45px 0 0
 }
 
 .about-container .our-company-text h3 {
@@ -13,6 +13,7 @@
 
 .about-container .our-company-text p {
     font-size: 15px;
+    width: 35em;
     color: #969696;
     line-height: 23px;
     margin: 15px 0 0
@@ -23,15 +24,18 @@
 }
 
 .about-container .our-company-quote .our-company-img img {
-    width: 100%
+    width: 220%
 }
 
 .about-container .our-company-quote .our-company-brief {
     font-size: 15px;
+    width: 35em;
     color: #969696;
     line-height: 23px;
     padding: 45px 0 0;
-    position: relative
+    position: relative;
+    left: -870px;
+    bottom: -150px
 }
 
 .about-container .our-company-quote .our-company-brief:before {
