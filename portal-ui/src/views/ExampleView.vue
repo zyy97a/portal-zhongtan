@@ -19,10 +19,10 @@
 		<div class="section example">
 			<div class="container" style="max-width: 1160px; margin: 0 auto">
 				<div class="section--header">
-					<h2 class="section--title">全球首创 自主创新</h2>
+					<h2 class="section--title">携手共创 点亮每一个精彩瞬间</h2>
 					<p class="section--description">
-						Enterplorer Studio是一套面向企业级移动信息化建设的开发平台。集聚开发、测试、
-						<br>打包、发布于一体的移动化开发综合平台。
+            我们专注于广告装饰发光字及招牌的设计与制作，致力于为客户打造独特、亮眼的品牌形象。
+						<br>以下是我们与合作伙伴共同完成的一些经典案例，展示了我们在这一领域的专业实力和创意设计。
 					</p>
 				</div>
 				
