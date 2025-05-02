@@ -1,17 +1,37 @@
 <!DOCTYPE html>
 <html lang="">
-  <head>
+<head>
     <meta charset="utf-8">
+    <!-- 添加视口标签，确保页面在移动设备上正确显示和缩放 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>佛山钟潭装饰工程有限公司</title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+    <!-- 可以添加通用的响应式样式 -->
+    <style>
+        /* 让所有元素的盒模型计算方式为 border-box */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        /* 让 body 填充整个视口宽度 */
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+        /* 让图片自适应容器宽度 */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+<noscript>
+    <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+</noscript>
+<div id="app"></div>
+<!-- built files will be auto injected -->
+</body>
 </html>

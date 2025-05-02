@@ -1,5 +1,13 @@
 <template>
 	<Layout>
+    <div class="layout-container" style="width: 100%">
+      <div class="solution-page">
+        <div class="container" style="text-align: center">
+          <h2>佛山钟潭装饰工程有限公司</h2>
+          <p>钟潭熟悉每种制作材料和制作工艺，擅长叠加使用放大您的品牌优势。钟潭坚持定制化原则，倾听您的需求，在任何时候都能给你提供专业的招牌和金属制品的意见和帮助，创建符合您期望要求的品牌标志。</p>
+        </div>
+      </div>
+    </div>
 		<div  style="width: 100%">
 			<div class="index-page">
 				<div data-am-widget="tabs" class="am-tabs am-tabs-default">

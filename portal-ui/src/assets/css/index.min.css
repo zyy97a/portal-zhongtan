@@ -1,9 +1,9 @@
 .index-page {
-    position: relative; /* 确保子元素定位相对于背景图 */
+   /* position: relative; !* 确保子元素定位相对于背景图 *!
     background: url('../images/product/abouthostorybg.jpg') no-repeat center center;
     background-size: cover;
     color: #1a2b25;
-    padding-bottom: 380px;
+    padding-bottom: 300px;*/
 
     /*width: 100%;*/
     /*border-bottom: 1px solid #e9e9e9*/

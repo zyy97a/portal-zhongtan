@@ -8,8 +8,10 @@
 						<strong class="footer_main--column_title">产品中心</strong>
 						<ul class="footer_navigation">
 							<li class="footer_navigation--item"><router-link to="/product" class="footer_navigation--link">发光招牌</router-link></li>
-							<li class="footer_navigation--item"><router-link to="/product" class="footer_navigation--link">指示牌</router-link></li>
-							<li class="footer_navigation--item"><router-link to="/product" class="footer_navigation--link">雕塑品</router-link></li>
+							<li class="footer_navigation--item"><router-link to="/product" class="footer_navigation--link">不发光招牌</router-link></li>
+							<li class="footer_navigation--item"><router-link to="/product" class="footer_navigation--link">金属制品</router-link></li>
+              <li class="footer_navigation--item"><router-link to="/product" class="footer_navigation--link">指示牌</router-link></li>
+              <li class="footer_navigation--item"><router-link to="/product" class="footer_navigation--link">灯箱</router-link></li>
 						</ul>
 					</div>
 				</div>
