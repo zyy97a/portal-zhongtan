@@ -105,5 +105,29 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
 
+/* Hero section */
+.hero-section {
+  position: relative;
+  height: 300px;
+  background-image: url('../assets/images/about/gc1.jpg');
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(52, 152, 219, 0.2), rgba(44, 62, 80, 0.7));
+}
 </style>

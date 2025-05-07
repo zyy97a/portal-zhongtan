@@ -31,7 +31,8 @@ public class SwaggerConfig {
                 // return new Docket(DocumentationType.OAS_30)  // 3
                 .pathMapping("/")
                 .enable(true)
-                .host("localhost:8888")
+//                .host("localhost:8888")
+                .host("116.62.21.148:8888")
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.record.controller"))
@@ -44,11 +45,12 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("四川XXXX有限公司")
-                .description("四川XXXX有限公司——接口文档")
-                .contact(new Contact("京茶吉鹿", "http:localhost:8888/doc.html", "jc.jingchao@qq.com"))
+                .title("佛山钟潭装饰有限公司")
+                .description("佛山钟潭装饰有限公司——接口文档")
+//                .contact(new Contact("钟潭", "http:localhost:8888/doc.html", "jc.jingchao@qq.com"))
+                .contact(new Contact("钟潭", "http://116.62.21.148:8087/doc.html", "982494749@qq.com"))
                 .version("1.0.0")
-                .termsOfServiceUrl("http://localhost:8888")
+                .termsOfServiceUrl("http://116.62.21.148:8888")
                 .build();
     }
 
@@ -70,4 +72,50 @@ public class SwaggerConfig {
         return singletonList(
                 new SecurityReference("Authorization", authorizationScopes));
     }
+
+    /*@Bean
+    public Docket createRestApi() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .pathMapping("/")
+                .enable(true)
+//                .host("116.62.21.148:8087")  // 使用服务器的 IP 地址和后端端口
+                .host("116.62.21.148:8888")  // 使用服务器的 IP 地址和后端端口
+                .apiInfo(apiInfo())
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.record.controller"))  // 扫描指定包下的控制器
+                .paths(PathSelectors.any())  // 扫描所有路径
+                .build()
+                .securitySchemes(singletonList(apiKey()))  // 配置API key验证
+                .securityContexts(singletonList(securityContext()));  // 配置SecurityContext
+    }
+
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder()
+                .title("佛山钟潭有限公司 API 文档")
+                .description("佛山钟潭有限公司接口文档，供开发和使用者参考")
+//                .contact(new Contact("钟潭", "http://116.62.21.148:8087/doc.html", "jc.jingchao@qq.com"))
+                .contact(new Contact("钟潭", "http://116.62.21.148:8888/doc.html", "jc.jingchao@qq.com"))
+                .version("1.0.0")
+//                .termsOfServiceUrl("http://116.62.21.148:8087")
+                .termsOfServiceUrl("http://116.62.21.148:8888")
+                .build();
+    }
+
+    private ApiKey apiKey() {
+        return new ApiKey("Authorization", "Authorization", "Header");  // API 认证
+    }
+
+    private SecurityContext securityContext() {
+        return SecurityContext.builder()
+                .securityReferences(defaultAuth())
+                .forPaths(PathSelectors.regex("/hello/.*"))  // 配置哪些路径需要认证，修改为你需要保护的路径
+                .build();
+    }
+
+    private List<SecurityReference> defaultAuth() {
+        AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
+        AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
+        authorizationScopes[0] = authorizationScope;
+        return singletonList(new SecurityReference("Authorization", authorizationScopes));
+    }*/
 }
