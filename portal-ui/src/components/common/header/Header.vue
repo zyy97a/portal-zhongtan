@@ -28,7 +28,7 @@
       <div class="header-right">
         <!-- 桌面端显示完整按钮和二维码 -->
         <template v-if="!isMobile">
-          <a href="tel:+13078164038" class="contact-button">
+          <a href="tel:+8613078164038" class="contact-button">
             <button type="button">联系我们</button>
           </a>
           <div class="qrcode-container">
@@ -53,7 +53,7 @@
         </template>
 
         <!-- 手机端只显示电话按钮 -->
-        <a v-if="isMobile" href="tel:+13078164038" class="mobile-call-btn">
+        <a v-if="isMobile" href="tel:+8613078164038" class="mobile-call-btn">
           <i class="am-icon-phone"></i>
         </a>
 

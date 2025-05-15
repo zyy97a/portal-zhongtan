@@ -1,7 +1,6 @@
 <template>
   <Layout>
     <!-- 页面顶部区域 - 更现代的英雄区设计 -->
-
     <div class="hero-section">
       <div class="hero-overlay"></div>
       <div class="hero-content">
@@ -51,8 +50,8 @@
                   <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
                 </svg>
                 <svg v-else-if="tab.id === 3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
                 </svg>
                 <svg v-else-if="tab.id === 4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
@@ -85,7 +84,7 @@
               <span>加载中...</span>
             </div>
 
-            <div v-else-if="list.length === 0" class="empty-state">
+            <div v-else-if="caseData[tabIndex].cases.length === 0" class="empty-state">
               <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                 <circle cx="8.5" cy="8.5" r="1.5"></circle>
@@ -97,13 +96,13 @@
 
             <div v-else class="gallery-grid">
               <div
-                  v-for="(image, index) in list"
+                  v-for="(caseItem, index) in caseData[tabIndex].cases"
                   :key="index"
                   class="gallery-item"
-                  @click="openLightbox(index)"
+                  @click="navigateToDetail(tabIndex, caseItem.id)"
               >
                 <div class="image-wrapper">
-                  <img :src="image" :alt="`${getCurrentTabName()}案例 ${index + 1}`">
+                  <img :src="caseItem.thumbImg" :alt="caseItem.title">
                   <div class="image-overlay">
                     <div class="overlay-content">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -117,7 +116,7 @@
                   </div>
                 </div>
                 <div class="gallery-item-info">
-                  <h3 class="gallery-item-title">{{ getCurrentTabName() }} {{ index + 1 }}</h3>
+                  <h3 class="gallery-item-title">{{ caseItem.title }}</h3>
                   <span class="gallery-item-tag">{{ tabList[tabIndex].name }}</span>
                 </div>
               </div>
@@ -126,15 +125,15 @@
         </transition>
 
         <!-- 更现代的分页器 (可选) -->
-        <div v-if="list.length > 0" class="pagination">
-          <button class="pagination-btn" :disabled="true">
+        <div v-if="caseData[tabIndex].cases.length > 0" class="pagination">
+          <button class="pagination-btn" :disabled="currentPage <= 1" @click="changePage(currentPage - 1)">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
             上一页
           </button>
-          <span class="pagination-info">第 1 页，共 {{ Math.ceil(list.length / 8) }} 页</span>
-          <button class="pagination-btn" :disabled="list.length <= 8">
+          <span class="pagination-info">第 {{ currentPage }} 页，共 {{ Math.ceil(caseData[tabIndex].cases.length / itemsPerPage) }} 页</span>
+          <button class="pagination-btn" :disabled="currentPage >= Math.ceil(caseData[tabIndex].cases.length / itemsPerPage)" @click="changePage(currentPage + 1)">
             下一页
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="9 18 15 12 9 6"></polyline>
@@ -151,22 +150,22 @@
                 <line x1="6" y1="6" x2="18" y2="18"></line>
               </svg>
             </button>
-            <button class="lightbox-nav prev" v-if="list.length > 1" @click.stop="navigateLightbox(-1)">
+            <button class="lightbox-nav prev" v-if="lightboxImages.length > 1" @click.stop="navigateLightbox(-1)">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="15 18 9 12 15 6"></polyline>
               </svg>
             </button>
-            <button class="lightbox-nav next" v-if="list.length > 1" @click.stop="navigateLightbox(1)">
+            <button class="lightbox-nav next" v-if="lightboxImages.length > 1" @click.stop="navigateLightbox(1)">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
             </button>
             <div class="lightbox-image-container">
-              <img :src="list[currentLightboxIndex]" :alt="`${getCurrentTabName()}案例 ${currentLightboxIndex + 1}`">
+              <img :src="lightboxImages[currentLightboxIndex]" :alt="lightboxTitle">
             </div>
             <div class="lightbox-caption">
-              <span class="lightbox-counter">{{ currentLightboxIndex + 1 }} / {{ list.length }}</span>
-              <span class="lightbox-title">{{ getCurrentTabName() }} - 案例 {{ currentLightboxIndex + 1 }}</span>
+              <span class="lightbox-counter">{{ currentLightboxIndex + 1 }} / {{ lightboxImages.length }}</span>
+              <span class="lightbox-title">{{ lightboxTitle }}</span>
             </div>
           </div>
         </div>
@@ -179,11 +178,13 @@
 import Layout from "@/components/common/Layout";
 
 export default {
-  name: "ExampleView",
+  name: "CaseListingView",
   components: { Layout },
   data() {
     return {
       tabIndex: 0,
+      currentPage: 1,
+      itemsPerPage: 8,
       tabList: [
         { id: 1, name: '主要案例', icon: 'star' },
         { id: 2, name: '政府案例', icon: 'landmark' },
@@ -192,59 +193,399 @@ export default {
         { id: 5, name: '房地产案例', icon: 'building' },
         { id: 6, name: '教育案例', icon: 'book' },
       ],
-      list: [],
-      loading: true,
+      caseData: [
+        {
+          type: '主要案例',
+          cases: [
+            {
+              id: 101,
+              title: '星光商业广场发光字招牌',
+              thumbImg: require('@/assets/images/about/beij3.jpg'),
+              images: [
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg')
+              ],
+              location: '上海市静安区南京西路',
+              client: '星光商业管理有限公司',
+              completionTime: '2024年3月',
+              description: '星光商业广场作为城市新地标，需要一套能够在夜间彰显品牌魅力的标识系统。我们采用了RGB智能变色LED技术，为其打造了一套可根据节日和活动主题变换色彩的大型发光字招牌。'
+            },
+            {
+              id: 102,
+              title: '海天国际酒店门头设计',
+              thumbImg: require('@/assets/images/about/beij3.jpg'),
+              images: [
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg')
+              ],
+              location: '广州市天河区珠江新城',
+              client: '海天国际酒店集团',
+              completionTime: '2023年12月',
+              description: '为海天国际酒店设计的门头招牌，采用了高档金属材质与内嵌LED灯带相结合的方式，在白天展现豪华稳重的气质，夜晚则通过精心设计的灯光方案彰显高端奢华的品牌定位。'
+            },
+            {
+              id: 103,
+              title: '蓝天科技园区整体标识系统',
+              thumbImg: require('@/assets/images/about/beij3.jpg'),
+              images: [
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg')
+              ],
+              location: '深圳市南山区科技园',
+              client: '蓝天科技有限公司',
+              completionTime: '2024年2月',
+              description: '为蓝天科技园区打造的整体标识系统，包括园区入口标识、楼宇发光字、指示牌等多种形式。整体设计理念源于科技与自然的融合，采用了蓝色渐变光效与生态树脂材料相结合，展现科技感与环保理念。'
+            },
+            {
+              id: 104,
+              title: '新月购物中心品牌墙',
+              thumbImg: require('@/assets/images/about/beij3.jpg'),
+              images: [
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg')
+              ],
+              location: '北京市朝阳区建国路',
+              client: '新月商业地产开发有限公司',
+              completionTime: '2023年10月',
+              description: '新月购物中心的品牌墙位于商场主入口，作为视觉焦点需要具有强烈的冲击力。我们采用了镜面不锈钢与LED逆发光技术，打造出似漂浮在空中的品牌标识，配合智能感应系统，可根据人流量调整亮度和动画效果。'
+            },
+            {
+              id: 105,
+              title: '绿洲咖啡连锁店发光招牌',
+              thumbImg: require('@/assets/images/about/beij3.jpg'),
+              images: [
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg')
+              ],
+              location: '多地连锁',
+              client: '绿洲咖啡有限公司',
+              completionTime: '2024年1月',
+              description: '为绿洲咖啡连锁店设计的标准化发光招牌，采用环保亚克力与暖白光源相结合，体现品牌温馨自然的调性。招牌设计兼顾了日夜两种视觉效果，并充分考虑了不同城市的安装环境和法规要求。'
+            },
+            {
+              id: 106,
+              title: '东方文化中心大型LED屏',
+              thumbImg: require('@/assets/images/about/beij3.jpg'),
+              images: [
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg')
+              ],
+              location: '重庆市渝中区人民广场',
+              client: '重庆市文化旅游局',
+              completionTime: '2023年9月',
+              description: '为东方文化中心量身定制的大型LED显示屏，面积达200平方米，采用了最新的小间距LED技术，可播放8K超高清内容。系统集成了智能温控、远程管理等功能，并针对当地多雨潮湿的气候做了特殊防水设计。'
+            }
+          ]
+        },
+        {
+          type: '政府案例',
+          cases: [
+            {
+              id: 201,
+              title: '市政府大楼外立面标识工程',
+              thumbImg: require('@/assets/images/about/beij3.jpg'),
+              images: [
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg')
+              ],
+              location: '杭州市西湖区',
+              client: '杭州市政府办公厅',
+              completionTime: '2023年11月',
+              description: '为杭州市政府新办公大楼设计的外立面标识工程，采用316L不锈钢镜面工艺，结合特殊的防腐蚀处理，确保在湖区潮湿环境中长期保持良好状态。夜间通过精确计算的照明角度，使标识在湖面形成美丽倒影。'
+            },
+            {
+              id: 202,
+              title: '城市规划展览馆LED显示系统',
+              thumbImg: require('@/assets/images/about/beij3.jpg'),
+              images: [
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg')
+              ],
+              location: '南京市建邺区',
+              client: '南京市规划局',
+              completionTime: '2024年1月',
+              description: '为城市规划展览馆设计的大型LED显示系统，包括弧形屏、互动投影等多种形式。展示系统采用5G远程控制技术，可实时更新城市规划内容，并支持参观者通过手机互动参与虚拟城市建设。'
+            },
+            {
+              id: 203,
+              title: '文化广场城市灯光标识',
+              thumbImg: require('@/assets/images/about/beij3.jpg'),
+              images: [
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg')
+              ],
+              location: '武汉市江汉区',
+              client: '武汉市文化旅游局',
+              completionTime: '2023年8月',
+              description: '为武汉文化广场设计的城市灯光标识，高达18米，采用钢结构骨架与透光膜材质，内置1600个独立可控LED点光源，能够呈现复杂的光影效果，成为城市新地标。系统集成了气象数据采集功能，可根据天气状况自动调整灯光表现。'
+            }
+          ]
+        },
+        {
+          type: '商业办公案例',
+          cases: [
+            {
+              id: 301,
+              title: '金融中心大厦顶层标识',
+              thumbImg: require('@/assets/images/about/beij3.jpg'),
+              images: [
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg')
+              ],
+              location: '上海市陆家嘴金融区',
+              client: '国际金融集团',
+              completionTime: '2024年2月',
+              description: '为金融中心大厦设计的顶层发光标识，高度位于320米的建筑顶端，需要考虑极端天气条件下的稳定性和维护便捷性。采用了航空级铝合金框架与超高亮度LED模组，配合远程监控系统，确保在各种条件下的正常运行。'
+            },
+            {
+              id: 302,
+              title: '创意产业园区导视系统',
+              thumbImg: require('@/assets/images/about/beij3.jpg'),
+              images: [
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg')
+              ],
+              location: '北京市朝阳区798艺术区',
+              client: '创意空间管理有限公司',
+              completionTime: '2023年12月',
+              description: '为798艺术区内的创意产业园设计的整体导视系统，融合了工业风格与现代艺术元素，采用锈蚀钢板与LED光源相结合的方式，既保留了原有工业遗存的质感，又增添了现代科技感，形成独特的视觉标识。'
+            },
+            {
+              id: 303,
+              title: '云端科技总部大厦标识',
+              thumbImg: require('@/assets/images/about/beij3.jpg'),
+              images: [
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg')
+              ],
+              location: '深圳市南山区高新技术园区',
+              client: '云端科技有限公司',
+              completionTime: '2024年1月',
+              description: '为云端科技公司总部大厦设计的企业标识，采用半透明导光材料与微型LED阵列相结合的方式，在日光下呈现轻盈通透的效果，夜间则通过精密的光程控制，营造出如云层般流动的光效，完美诠释了公司"云端"的品牌理念。'
+            }
+          ]
+        },
+        {
+          type: '公共服务案例',
+          cases: [
+            {
+              id: 401,
+              title: '中心医院医疗导视系统',
+              thumbImg: require('@/assets/images/about/beij3.jpg'),
+              images: [
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg')
+              ],
+              location: '广州市天河区',
+              client: '广州中心医院',
+              completionTime: '2023年10月',
+              description: '为广州中心医院设计的全院导视系统，包括门诊、住院、急诊等多个区域的标识与导航。系统采用了色彩编码分区设计，结合智能终端查询，大幅提升了患者的就医体验。所有标识材料均采用抗菌材质，符合医疗环境的特殊要求。'
+            },
+            {
+              id: 402,
+              title: '城市轨道交通标识系统',
+              thumbImg: require('@/assets/images/about/beij3.jpg'),
+              images: [
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg')
+              ],
+              location: '成都市地铁18号线',
+              client: '成都地铁集团',
+              completionTime: '2023年9月',
+              description: '为成都地铁18号线设计的全线标识系统，包括车站入口标识、方向指引、站台信息牌等多种形式。设计融入了成都地方文化元素，采用了耐候性强的材料与节能LED照明，确保长期使用的安全性与美观性。'
+            },
+            {
+              id: 403,
+              title: '体育中心赛事指示系统',
+              thumbImg: require('@/assets/images/about/beij3.jpg'),
+              images: [
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg')
+              ],
+              location: '西安市雁塔区',
+              client: '陕西省体育局',
+              completionTime: '2024年3月',
+              description: '为西安体育中心设计的赛事指示系统，采用模块化设计，可根据不同赛事快速更换内容。系统结合了电子墨水屏与LED照明，既保证了信息的清晰度，又大幅降低了能耗。特别考虑了大客流疏散的需求，在紧急情况下可切换为应急指引模式。'
+            }
+          ]
+        },
+        {
+          type: '房地产案例',
+          cases: [
+            {
+              id: 501,
+              title: '城市花园小区入口标识',
+              thumbImg: require('@/assets/images/about/beij3.jpg'),
+              images: [
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg')
+              ],
+              location: '上海市松江区',
+              client: '绿城房地产开发有限公司',
+              completionTime: '2023年11月',
+              description: '为城市花园高端住宅小区设计的入口标识，采用了天然石材与铜板相结合的方式，体现项目的高端品质。夜间照明采用了隐藏式设计，营造出温馨而不张扬的氛围，同时考虑了周边居民的光污染问题，精确控制了光照角度与亮度。'
+            },
+            {
+              id: 502,
+              title: '滨海公寓综合标识系统',
+              thumbImg: require('@/assets/images/about/beij3.jpg'),
+              images: [
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg')
+              ],
+              location: '厦门市思明区',
+              client: '万科地产',
+              completionTime: '2023年12月',
+              description: '为滨海公寓设计的综合标识系统，包括楼栋标识、景观指示牌、公共设施标识等多个部分。设计灵感来源于海浪元素，采用了防腐蚀材料与特殊工艺，适应海边潮湿多盐的环境特点。夜间照明考虑了居住舒适度，采用了柔和的间接光源。'
+            },
+            {
+              id: 503,
+              title: '云境商业广场品牌标识',
+              thumbImg: require('@/assets/images/about/beij3.jpg'),
+              images: [
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg')
+              ],
+              location: '重庆市渝北区',
+              client: '华润置地',
+              completionTime: '2024年2月',
+              description: '为云境商业广场打造的品牌标识，结合了当地山城特色与现代商业气息。主招牌采用了大型悬臂结构与3D立体字相结合的形式，并通过特殊的表面处理，在不同角度呈现出渐变的视觉效果。照明系统支持多种场景切换，适应不同季节和营销活动。'
+            }
+          ]
+        },
+        {
+          type: '教育案例',
+          cases: [
+            {
+              id: 601,
+              title: '未来科技学院校园标识',
+              thumbImg: require('@/assets/images/about/beij3.jpg'),
+              images: [
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg')
+              ],
+              location: '北京市海淀区',
+              client: '北京理工大学',
+              completionTime: '2023年8月',
+              description: '为未来科技学院设计的校园标识系统，融合了学院前沿科技的理念与传统学府的人文精神。入口处的大型标识采用了动态光电材料，可根据环境光线自动调整亮度和颜色，校内指示系统则采用了环保材料与简约设计，营造出轻松开放的学习氛围。'
+            },
+            {
+              id: 602,
+              title: '儿童科技馆互动标识',
+              thumbImg: require('@/assets/images/about/beij3.jpg'),
+              images: [
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg')
+              ],
+              location: '上海市普陀区',
+              client: '上海市科协',
+              completionTime: '2024年1月',
+              description: '为儿童科技馆设计的互动标识系统，将导视功能与科普内容有机结合。系统采用了触控屏幕、声光感应等多种交互技术，让孩子们在寻找展区的过程中也能获取知识。所有材料均符合儿童安全标准，并采用了防撞圆角设计。'
+            },
+            {
+              id: 603,
+              title: '图书馆阅读空间标识',
+              thumbImg: require('@/assets/images/about/beij3.jpg'),
+              images: [
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/about/beij3.jpg')
+              ],
+              location: '南京市鼓楼区',
+              client: '南京大学图书馆',
+              completionTime: '2023年10月',
+              description: '为大学图书馆阅读空间设计的标识系统，注重细节与阅读环境的和谐。系统采用了无反光材料与静音设计，最大限度减少对读者的干扰。分区色彩基于色彩心理学精心挑选，有助于调节阅读情绪，提高学习效率。导视设计结合了古籍元素，彰显深厚的文化底蕴。'
+            }
+          ]
+        }
+      ],
+      loading: false,
       lightboxVisible: false,
+      lightboxImages: [],
+      lightboxTitle: '',
       currentLightboxIndex: 0
     }
   },
   mounted() {
     document.title = '客户案例 - 广告装饰发光字及招牌设计制作';
-    this.findExampleByExampleType(0);
   },
   methods: {
     changeTab(index) {
       if (this.tabIndex === index) return;
       this.tabIndex = index;
+      this.currentPage = 1;
       this.loading = true;
-      this.findExampleByExampleType(index);
 
-      // 滚动到案例区域
-      const galleryContainer = document.querySelector('.gallery-container');
-      if (galleryContainer) {
-        setTimeout(() => {
+      // 模拟加载效果
+      setTimeout(() => {
+        this.loading = false;
+
+        // 滚动到案例区域
+        const galleryContainer = document.querySelector('.gallery-container');
+        if (galleryContainer) {
           galleryContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 100);
-      }
+        }
+      }, 500);
     },
 
-    findExampleByExampleType(exampleType) {
-      this.getRequest(`/findExampleByExampleType/${exampleType}`).then(resp => {
-        this.loading = false;
-        if (resp && resp.data && resp.data.data) {
-          const temp = resp.data.data;
-          const list = [];
-          for (let i = 1; i < 17; i++) {
-            if (temp['image' + i] != null) {
-              list.push(temp['image' + i]);
-            }
-          }
-          this.list = list;
-        } else {
-          this.list = [];
-        }
-      }).catch(() => {
-        this.loading = false;
-        this.list = [];
-      });
+    changePage(page) {
+      this.currentPage = page;
+
+      // 滚动到顶部
+      const galleryContainer = document.querySelector('.gallery-container');
+      if (galleryContainer) {
+        galleryContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     },
 
     getCurrentTabName() {
       return this.tabList[this.tabIndex].name;
     },
 
-    openLightbox(index) {
-      this.currentLightboxIndex = index;
+    navigateToDetail(tabIndex, caseId) {
+      // 使用路由导航到详情页
+      this.$router.push({
+        name: 'CaseDetail',
+        params: { id: caseId },
+        query: { tab: tabIndex }
+      });
+    },
+
+    openLightbox(images, title, startIndex = 0) {
+      this.lightboxImages = images;
+      this.lightboxTitle = title;
+      this.currentLightboxIndex = startIndex;
       this.lightboxVisible = true;
       document.body.classList.add('no-scroll');
     },
@@ -256,10 +597,10 @@ export default {
 
     navigateLightbox(direction) {
       const newIndex = this.currentLightboxIndex + direction;
-      if (newIndex >= 0 && newIndex < this.list.length) {
+      if (newIndex >= 0 && newIndex < this.lightboxImages.length) {
         this.currentLightboxIndex = newIndex;
       } else if (newIndex < 0) {
-        this.currentLightboxIndex = this.list.length - 1;
+        this.currentLightboxIndex = this.lightboxImages.length - 1;
       } else {
         this.currentLightboxIndex = 0;
       }
@@ -450,7 +791,7 @@ export default {
   height: 50px;
 }
 
- .page-hero::after {
+.page-hero::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -524,9 +865,11 @@ export default {
 
 .tabs-container {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e2e8f0;
 }
 
 .tab-item {
@@ -970,9 +1313,9 @@ export default {
     font-size: 18px;
   }
 
-/*  .hero-section {
-    height: 250px;
-  }*/
+  /*  .hero-section {
+      height: 250px;
+    }*/
 
   .section-title {
     font-size: 30px;
@@ -1015,9 +1358,9 @@ export default {
     padding: 10px 20px;
     font-size: 14px;
   }
-/*  .hero-section {
-    height: 200px;
-  }*/
+  /*  .hero-section {
+      height: 200px;
+    }*/
 
   .section-title {
     font-size: 26px;
@@ -1028,8 +1371,7 @@ export default {
   }
 
   .tabs-container {
-    flex-wrap: wrap;
-    gap: 10px;
+    justify-content: flex-start;
   }
 
   .tab-item {
@@ -1092,10 +1434,10 @@ export default {
     width: 100%;
   }
 
-/*
-  .hero-section {
-    height: 180px;
-  }*/
+  /*
+    .hero-section {
+      height: 180px;
+    }*/
   .section-title {
     font-size: 24px;
   }

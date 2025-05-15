@@ -135,8 +135,9 @@
         </div>
 
         <div class="contact-cta">
-          <button class="primary-btn">立即咨询</button>
-          <button class="outline-btn">查看案例</button>
+          <a href="tel:+8613078164038" class="primary-btn">立即咨询</a>
+<!--          <a href="ExampleView.vue" class="outline-btn">查看案例</a>-->
+          <router-link to="/example" class="outline-btn">查看案例</router-link>
         </div>
       </div>
     </section>

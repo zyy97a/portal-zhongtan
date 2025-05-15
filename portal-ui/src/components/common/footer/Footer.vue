@@ -29,7 +29,7 @@
 					<div class="footer_main--column">
 						<strong class="footer_main--column_title">联系详情</strong>
 						<ul class="footer_contact_info">
-							<li class="footer_contact_info--item"><i class="am-icon-phone"></i><span>服务专线：15284734274</span></li>
+							<li class="footer_contact_info--item"><i class="am-icon-phone"></i><span>服务专线：13078164038</span></li>
 							<li class="footer_contact_info--item"><i class="am-icon-map-marker"></i><span>广东省佛山市南海区</span></li>
 							<li class="footer_contact_info--item"><i class="am-icon-clock-o"></i><span>周一 ~ 周日, 8:00 - 23:00 </span></li>
 						</ul>
