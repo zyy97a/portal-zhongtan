@@ -99,7 +99,7 @@
                   v-for="(caseItem, index) in caseData[tabIndex].cases"
                   :key="index"
                   class="gallery-item"
-                  @click="navigateToDetail(tabIndex, caseItem.id)"
+                  @click="openDetailModal(caseItem)"
               >
                 <div class="image-wrapper">
                   <img :src="caseItem.thumbImg" :alt="caseItem.title">
@@ -166,6 +166,115 @@
             <div class="lightbox-caption">
               <span class="lightbox-counter">{{ currentLightboxIndex + 1 }} / {{ lightboxImages.length }}</span>
               <span class="lightbox-title">{{ lightboxTitle }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 案例详情弹窗 -->
+        <div class="case-detail-modal" v-if="detailModalVisible" @click="closeDetailModal">
+          <div class="case-modal-content" @click.stop>
+            <button class="modal-close" @click="closeDetailModal">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+
+            <div class="case-modal-body">
+              <div class="case-modal-gallery">
+                <div class="featured-image">
+                  <img :src="currentCase.images && currentCase.images.length ? currentCase.images[currentImageIndex] : currentCase.thumbImg" :alt="currentCase.title">
+                  <div class="image-controls" v-if="currentCase.images && currentCase.images.length > 1">
+                    <button class="image-nav prev" @click="changeImage(-1)">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                      </svg>
+                    </button>
+                    <button class="image-nav next" @click="changeImage(1)">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="image-thumbnails" v-if="currentCase.images && currentCase.images.length > 1">
+                  <div
+                      v-for="(image, index) in currentCase.images"
+                      :key="index"
+                      class="thumbnail"
+                      :class="{'active': index === currentImageIndex}"
+                      @click="currentImageIndex = index"
+                  >
+                    <img :src="image" :alt="`${currentCase.title} - 缩略图 ${index + 1}`">
+                  </div>
+                </div>
+              </div>
+
+              <div class="case-modal-details">
+                <h2 class="case-title">{{ currentCase.title }}</h2>
+
+                <div class="case-meta">
+                  <div class="meta-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                      <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    <span>{{ currentCase.location || '未知位置' }}</span>
+                  </div>
+
+                  <div class="meta-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="9" cy="7" r="4"></circle>
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    <span>{{ currentCase.client || '未知客户' }}</span>
+                  </div>
+
+                  <div class="meta-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                      <line x1="16" y1="2" x2="16" y2="6"></line>
+                      <line x1="8" y1="2" x2="8" y2="6"></line>
+                      <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    <span>{{ currentCase.completionTime || '未知完成时间' }}</span>
+                  </div>
+
+                  <div class="meta-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                    <span>{{ tabList[tabIndex].name }}</span>
+                  </div>
+                </div>
+
+                <div class="case-description">
+                  <h3>项目概述</h3>
+                  <p>{{ currentCase.description || '暂无项目描述' }}</p>
+                </div>
+
+                <div class="case-footer">
+                  <button class="view-all-btn" @click="viewAllImages" v-if="currentCase.images && currentCase.images.length > 0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                      <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                      <polyline points="21 15 16 10 5 21"></polyline>
+                    </svg>
+                    查看所有图片
+                  </button>
+
+                  <button class="contact-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                      <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    咨询类似方案
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -534,7 +643,26 @@ export default {
       lightboxVisible: false,
       lightboxImages: [],
       lightboxTitle: '',
-      currentLightboxIndex: 0
+      currentLightboxIndex: 0,
+      // New properties for the detail modal
+      detailModalVisible: false,
+      currentCase: {},
+      currentImageIndex: 0
+    }
+  },
+  computed: {
+    filteredCases() {
+      const currentTabType = this.tabList[this.tabIndex].name;
+      const tabData = this.caseData.find(item => item.type === currentTabType) || { cases: [] };
+      return tabData.cases;
+    },
+    totalPages() {
+      return Math.ceil(this.filteredCases.length / this.itemsPerPage);
+    },
+    paginatedCases() {
+      const start = (this.currentPage - 1) * this.itemsPerPage;
+      const end = start + this.itemsPerPage;
+      return this.filteredCases.slice(start, end);
     }
   },
   mounted() {
@@ -550,23 +678,21 @@ export default {
       // 模拟加载效果
       setTimeout(() => {
         this.loading = false;
-
-        // 滚动到案例区域
-        const galleryContainer = document.querySelector('.gallery-container');
-        if (galleryContainer) {
-          galleryContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+        this.scrollToGallery();
       }, 500);
     },
 
-    changePage(page) {
-      this.currentPage = page;
-
-      // 滚动到顶部
+    scrollToGallery() {
       const galleryContainer = document.querySelector('.gallery-container');
       if (galleryContainer) {
         galleryContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
+    },
+
+    changePage(page) {
+      if (page < 1 || page > this.totalPages || page === this.currentPage) return;
+      this.currentPage = page;
+      this.scrollToGallery();
     },
 
     getCurrentTabName() {
@@ -582,6 +708,31 @@ export default {
       });
     },
 
+    // Case detail modal methods
+    openDetailModal(caseItem) {
+      this.currentCase = { ...caseItem };
+      this.currentImageIndex = 0;
+      this.detailModalVisible = true;
+      document.body.classList.add('no-scroll');
+    },
+
+    closeDetailModal() {
+      this.detailModalVisible = false;
+      document.body.classList.remove('no-scroll');
+    },
+
+    changeImage(direction) {
+      const imagesLength = this.currentCase.images.length;
+      if (!imagesLength) return;
+
+      this.currentImageIndex = (this.currentImageIndex + direction + imagesLength) % imagesLength;
+    },
+
+    viewAllImages() {
+      this.openLightbox(this.currentCase.images, this.currentCase.title, this.currentImageIndex);
+    },
+
+    // Lightbox methods
     openLightbox(images, title, startIndex = 0) {
       this.lightboxImages = images;
       this.lightboxTitle = title;
@@ -596,39 +747,77 @@ export default {
     },
 
     navigateLightbox(direction) {
-      const newIndex = this.currentLightboxIndex + direction;
-      if (newIndex >= 0 && newIndex < this.lightboxImages.length) {
-        this.currentLightboxIndex = newIndex;
-      } else if (newIndex < 0) {
-        this.currentLightboxIndex = this.lightboxImages.length - 1;
-      } else {
-        this.currentLightboxIndex = 0;
-      }
+      const imagesLength = this.lightboxImages.length;
+      if (!imagesLength) return;
+
+      this.currentLightboxIndex = (this.currentLightboxIndex + direction + imagesLength) % imagesLength;
     }
   }
 }
 </script>
 
 <style scoped>
-/* 全局样式 */
+/* ===============================
+   GLOBAL STYLES
+   =============================== */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 15px;
 }
 
-/* 页面顶部英雄区域 - 更有吸引力的设计 */
-/* Hero section */
-/*.hero-section {
-  position: relative;
-  height: 300px;
-  background-image: url('/Users/zyysyx/Documents/zyyjava/portal-zhongtan1/portal-ui/src/assets/images/footer.jpg');
-  background-size: cover;
-  background-position: center;
-  color: #fff;
-  margin-bottom: 20px;
-}*/
+/* Animation keyframes for reuse */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Transitions */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+/* ===============================
+   HERO SECTION (UNTOUCHED PER REQUEST)
+   =============================== */
 .hero-section {
   position: relative;
   height: 400px;
@@ -643,56 +832,6 @@ export default {
   overflow: hidden;
 }
 
-/* Breadcrumb */
-.breadcrumb-container {
-  background-color: #f5f5f5;
-  padding: 10px 0;
-  margin-bottom: 30px;
-}
-
-.breadcrumb {
-  display: flex;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.breadcrumb li {
-  margin-right: 10px;
-  font-size: 14px;
-}
-
-.breadcrumb li:after {
-  content: '/';
-  margin-left: 10px;
-  color: #999;
-}
-
-.breadcrumb li:last-child:after {
-  display: none;
-}
-
-.breadcrumb a {
-  color: #666;
-  text-decoration: none;
-}
-
-.breadcrumb .active {
-  color: #333;
-  font-weight: 600;
-}
-
-
-/*.hero-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  opacity: 0.2;
-}*/
-
 .hero-overlay {
   position: absolute;
   top: 0;
@@ -703,7 +842,6 @@ export default {
   background-image: linear-gradient(135deg, rgba(45, 71, 141, 0.9) 0%, rgba(32, 54, 114, 0.8) 100%), url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
-/*新加*/
 .hero-content {
   position: relative;
   z-index: 2;
@@ -731,6 +869,7 @@ export default {
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   animation: fadeInUp 0.8s ease-out 0.2s both;
 }
+
 .hero-cta {
   display: flex;
   justify-content: center;
@@ -810,8 +949,50 @@ export default {
   position: relative;
 }
 
+/* ===============================
+   BREADCRUMB
+   =============================== */
+.breadcrumb-container {
+  background-color: #f5f5f5;
+  padding: 10px 0;
+  margin-bottom: 30px;
+}
 
-/* 案例展示区域 - 更干净优雅的布局 */
+.breadcrumb {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.breadcrumb li {
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.breadcrumb li:after {
+  content: '/';
+  margin-left: 10px;
+  color: #999;
+}
+
+.breadcrumb li:last-child:after {
+  display: none;
+}
+
+.breadcrumb a {
+  color: #666;
+  text-decoration: none;
+}
+
+.breadcrumb .active {
+  color: #333;
+  font-weight: 600;
+}
+
+/* ===============================
+   SECTION HEADERS
+   =============================== */
 .showcase-section {
   padding: 80px 0;
   background-color: #f8fafc;
@@ -858,18 +1039,18 @@ export default {
   margin: 12px 0;
 }
 
-/* 案例分类标签 - 更现代的设计 */
+/* ===============================
+   CASE TABS
+   =============================== */
 .case-tabs {
   margin-bottom: 50px;
 }
 
 .tabs-container {
   display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  gap: 0.75rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid #e2e8f0;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
 }
 
 .tab-item {
@@ -921,7 +1102,9 @@ export default {
   font-weight: 500;
 }
 
-/* 案例图片展示区 - 更有吸引力的网格布局 */
+/* ===============================
+   GALLERY GRID
+   =============================== */
 .gallery-container {
   min-height: 300px;
   position: relative;
@@ -950,7 +1133,7 @@ export default {
 
 .image-wrapper {
   position: relative;
-  padding-top: 75%; /* 4:3 比例 */
+  padding-top: 75%; /* 4:3 ratio */
   overflow: hidden;
 }
 
@@ -1033,7 +1216,9 @@ export default {
   font-weight: 500;
 }
 
-/* 分页器 */
+/* ===============================
+   PAGINATION
+   =============================== */
 .pagination {
   display: flex;
   justify-content: center;
@@ -1072,7 +1257,9 @@ export default {
   font-size: 14px;
 }
 
-/* 加载状态 - 更精致的加载动画 */
+/* ===============================
+   LOADING & EMPTY STATES
+   =============================== */
 .loading-container {
   display: flex;
   flex-direction: column;
@@ -1092,11 +1279,6 @@ export default {
   margin-bottom: 15px;
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* 空状态 - 更友好的空状态提示 */
 .empty-state {
   text-align: center;
   padding: 60px 0;
@@ -1133,13 +1315,253 @@ export default {
   box-shadow: 0 6px 12px rgba(245, 158, 11, 0.35);
 }
 
-/* 图片预览弹窗 - 更现代的灯箱设计 */
+/* ===============================
+   MODAL & LIGHTBOX
+   =============================== */
+.case-detail-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.case-modal-content {
+  background-color: #fff;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 1200px;
+  max-height: 90vh;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.modal-close:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.05);
+}
+
+.case-modal-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.case-modal-gallery {
+  width: 100%;
+  flex: 0 0 60%;
+  background-color: #f0f0f0;
+  position: relative;
+}
+
+.featured-image {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000;
+}
+
+.featured-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: opacity 0.3s ease;
+}
+
+.image-controls {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  pointer-events: none;
+}
+
+.image-nav {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.image-nav:hover {
+  background-color: #fff;
+  transform: scale(1.05);
+}
+
+.image-thumbnails {
+  display: flex;
+  padding: 15px;
+  gap: 10px;
+  overflow-x: auto;
+  background-color: #fff;
+  border-top: 1px solid #eee;
+}
+
+.thumbnail {
+  width: 70px;
+  height: 70px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.thumbnail:hover {
+  transform: translateY(-2px);
+}
+
+.thumbnail.active {
+  border-color: #0078d4;
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.case-modal-details {
+  width: 100%;
+  flex: 0 0 40%;
+  padding: 25px;
+  overflow-y: auto;
+}
+
+.case-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #222;
+}
+
+.case-meta {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #555;
+}
+
+.meta-item svg {
+  color: #0078d4;
+}
+
+.case-description {
+  margin-bottom: 30px;
+}
+
+.case-description h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #333;
+}
+
+.case-description p {
+  line-height: 1.6;
+  color: #444;
+}
+
+.case-footer {
+  display: flex;
+  gap: 15px;
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.view-all-btn,
+.contact-btn {
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.view-all-btn {
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.view-all-btn:hover {
+  background-color: #e5e5e5;
+}
+
+.contact-btn {
+  background-color: #0078d4;
+  color: white;
+  border: none;
+  flex-grow: 1;
+}
+
+.contact-btn:hover {
+  background-color: #0069b8;
+}
+
+/* Lightbox styles */
 .lightbox {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
+  width: 100%;
+  height: 100%;
   background-color: rgba(100, 130, 196, 0.95);
   z-index: 9999;
   display: flex;
@@ -1251,56 +1673,16 @@ export default {
   font-weight: 500;
 }
 
-/* 动画效果 */
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
+/* Removed duplicate lightbox styles */
 
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-  transform: translateY(10px);
-}
-
-/*新加*/
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-
-/* 响应式适配 */
+/* ===============================
+   RESPONSIVE STYLES
+   =============================== */
 @media (max-width: 992px) {
   .page-hero {
     padding: 60px 0 40px;
   }
 
-  /*新加*/
   .hero-section {
     height: 350px;
   }
@@ -1312,10 +1694,6 @@ export default {
   .hero-description {
     font-size: 18px;
   }
-
-  /*  .hero-section {
-      height: 250px;
-    }*/
 
   .section-title {
     font-size: 30px;
@@ -1336,11 +1714,7 @@ export default {
   }
 }
 
-
-
 @media (max-width: 768px) {
-
-  /*新加*/
   .hero-section {
     height: 300px;
   }
@@ -1358,9 +1732,6 @@ export default {
     padding: 10px 20px;
     font-size: 14px;
   }
-  /*  .hero-section {
-      height: 200px;
-    }*/
 
   .section-title {
     font-size: 26px;
@@ -1407,6 +1778,7 @@ export default {
     font-size: 15px;
   }
 }
+
 
 @media (max-width: 576px) {
   /*新加*/
