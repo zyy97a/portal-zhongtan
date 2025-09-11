@@ -28,7 +28,7 @@ public class TypeController {
     private TypeService typeService;
 
 
-    @ApiOperation(value = "获取所有的电梯种类")
+    @ApiOperation(value = "获取所有的产品种类")
     @GetMapping("/findAllType")
     public Result findAllType(){
         List<Type> types = typeService.selectAllType();

@@ -28,7 +28,7 @@
           <div class="title-separator"></div>
           <p class="hero-description">了解我们最新的公司动态、行业资讯和技术分享</p>
           <div class="hero-cta">
-            <a href="#news" class="btn-explore">探索更多</a>
+            <a href="https://mp.weixin.qq.com/s/Gkq4iCbYQPcbKLUrdJrRXA" class="btn-explore" target="_blank">探索更多</a>
           </div>
         </div>
       </div>

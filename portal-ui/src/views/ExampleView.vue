@@ -9,7 +9,8 @@
           <p class="hero-description">探索我们精心打造的照明与招牌解决方案</p>
           <div class="hero-cta">
             <button class="hero-btn primary">浏览案例</button>
-            <button class="hero-btn secondary">联系我们</button>
+            <a href="tel:+8613078164038" class="hero-btn secondary">联系我们</a>
+<!--            <button class="hero-btn secondary">联系我们</button>-->
           </div>
         </div>
       </div>
@@ -308,26 +309,25 @@ export default {
           cases: [
             {
               id: 101,
-              title: '星光商业广场发光字招牌',
-              thumbImg: require('@/assets/images/about/beij3.jpg'),
+              title: '阳江盈信广场',
+              thumbImg: require('@/assets/images/xiangmuanli/yj.jpg'),
               images: [
-                require('@/assets/images/about/beij3.jpg'),
-                require('@/assets/images/about/beij3.jpg'),
-                require('@/assets/images/about/beij3.jpg'),
-                require('@/assets/images/about/beij3.jpg')
+                require('@/assets/images/xiangmuanli/yj.jpg'),
+                require('@/assets/images/xiangmuanli/yj4.jpg'),
+                require('@/assets/images/xiangmuanli/yj3.jpg')
               ],
-              location: '上海市静安区南京西路',
-              client: '星光商业管理有限公司',
-              completionTime: '2024年3月',
-              description: '星光商业广场作为城市新地标，需要一套能够在夜间彰显品牌魅力的标识系统。我们采用了RGB智能变色LED技术，为其打造了一套可根据节日和活动主题变换色彩的大型发光字招牌。'
+              location: '广东省阳江市江城区东风三路',
+              client: '有限公司',
+              completionTime: '2018年2月',
+              description: '阳江盈信广场作为当地的重要商业地标，我们团队有幸参与了广场内外艺术装置的设计与施工工作。本次项目以“城市美学融合商业氛围”为核心理念，结合广场建筑风格和人流动线，定制了一系列富有视觉冲击力与互动感的艺术装置。装置材质上选用环保耐用的材料，结合灯光与造型设计，既满足了白天的观赏性，也增强了夜间的氛围感。整体设计不仅提升了盈信广场的整体调性，也成为市民拍照打卡的热门点位，为商业空间注入更多文化与艺术气息。本项目从创意提案、深化设计到现场安装，全程由我们团队独立完成，体现了我们在公共艺术与商业场景融合方面的专业能力。'
             },
             {
               id: 102,
-              title: '海天国际酒店门头设计',
-              thumbImg: require('@/assets/images/about/beij3.jpg'),
+              title: '联塑招牌',
+              thumbImg: require('@/assets/images/xiangmuanli/ls1.jpg'),
               images: [
-                require('@/assets/images/about/beij3.jpg'),
-                require('@/assets/images/about/beij3.jpg'),
+                require('@/assets/images/xiangmuanli/ls1.jpg'),
+                require('@/assets/images/xiangmuanli/ls2.jpg'),
                 require('@/assets/images/about/beij3.jpg')
               ],
               location: '广州市天河区珠江新城',
@@ -337,61 +337,31 @@ export default {
             },
             {
               id: 103,
-              title: '蓝天科技园区整体标识系统',
-              thumbImg: require('@/assets/images/about/beij3.jpg'),
+              title: '欢乐海岸购物中心标识',
+              thumbImg: require('@/assets/images/xiangmuanli/hlha1.jpg'),
               images: [
-                require('@/assets/images/about/beij3.jpg'),
-                require('@/assets/images/about/beij3.jpg'),
-                require('@/assets/images/about/beij3.jpg'),
-                require('@/assets/images/about/beij3.jpg')
+                require('@/assets/images/xiangmuanli/hlha1.jpg'),
+                require('@/assets/images/xiangmuanli/hlha2.jpg'),
+                require('@/assets/images/xiangmuanli/hlha.jpg')
               ],
-              location: '深圳市南山区科技园',
-              client: '蓝天科技有限公司',
-              completionTime: '2024年2月',
-              description: '为蓝天科技园区打造的整体标识系统，包括园区入口标识、楼宇发光字、指示牌等多种形式。整体设计理念源于科技与自然的融合，采用了蓝色渐变光效与生态树脂材料相结合，展现科技感与环保理念。'
+              location: '欢乐海岸购物中心标识',
+              client: '欢乐海岸购物中心标识',
+              completionTime: '2020年12月',
+              description: '欢乐海岸购物中心作为集购物、美食、娱乐于一体的综合性商业体，对整体视觉导引系统有着高标准的设计要求。我们团队负责了整个项目的标识系统设计与制作安装，旨在打造一个美观、实用、统一的导视环境。本项目涵盖了入口主标识、楼层导向牌、功能区域指引、卫生间及停车场标识等多个模块。设计上，我们以“现代都市感+海岸元素”为创意基础，融合项目定位和建筑风格，整体色调清新明快，识别性强，既提升了购物中心的整体形象，也优化了顾客的动线体验。在制作与安装环节，我们选用了高强度金属结构与耐候性涂层材料，确保标识系统在高人流、高使用频率的商业环境中长期保持稳定与美观。整个项目从方案设计到落地执行，我们团队均保持高标准把控，体现了我们在商业标识系统工程中的专业能力和执行效率。'
             },
             {
               id: 104,
-              title: '新月购物中心品牌墙',
-              thumbImg: require('@/assets/images/about/beij3.jpg'),
+              title: '顺德联塑万怡酒店',
+              thumbImg: require('@/assets/images/xiangmuanli/sdls.jpg'),
               images: [
-                require('@/assets/images/about/beij3.jpg'),
-                require('@/assets/images/about/beij3.jpg'),
-                require('@/assets/images/about/beij3.jpg')
+                require('@/assets/images/xiangmuanli/sdls.jpg'),
+                require('@/assets/images/xiangmuanli/sdls1.jpg'),
+                require('@/assets/images/xiangmuanli/sdls2.jpg')
               ],
-              location: '北京市朝阳区建国路',
-              client: '新月商业地产开发有限公司',
-              completionTime: '2023年10月',
-              description: '新月购物中心的品牌墙位于商场主入口，作为视觉焦点需要具有强烈的冲击力。我们采用了镜面不锈钢与LED逆发光技术，打造出似漂浮在空中的品牌标识，配合智能感应系统，可根据人流量调整亮度和动画效果。'
-            },
-            {
-              id: 105,
-              title: '绿洲咖啡连锁店发光招牌',
-              thumbImg: require('@/assets/images/about/beij3.jpg'),
-              images: [
-                require('@/assets/images/about/beij3.jpg'),
-                require('@/assets/images/about/beij3.jpg'),
-                require('@/assets/images/about/beij3.jpg'),
-                require('@/assets/images/about/beij3.jpg')
-              ],
-              location: '多地连锁',
-              client: '绿洲咖啡有限公司',
-              completionTime: '2024年1月',
-              description: '为绿洲咖啡连锁店设计的标准化发光招牌，采用环保亚克力与暖白光源相结合，体现品牌温馨自然的调性。招牌设计兼顾了日夜两种视觉效果，并充分考虑了不同城市的安装环境和法规要求。'
-            },
-            {
-              id: 106,
-              title: '东方文化中心大型LED屏',
-              thumbImg: require('@/assets/images/about/beij3.jpg'),
-              images: [
-                require('@/assets/images/about/beij3.jpg'),
-                require('@/assets/images/about/beij3.jpg'),
-                require('@/assets/images/about/beij3.jpg')
-              ],
-              location: '重庆市渝中区人民广场',
-              client: '重庆市文化旅游局',
-              completionTime: '2023年9月',
-              description: '为东方文化中心量身定制的大型LED显示屏，面积达200平方米，采用了最新的小间距LED技术，可播放8K超高清内容。系统集成了智能温控、远程管理等功能，并针对当地多雨潮湿的气候做了特殊防水设计。'
+              location: '顺德联塑万怡酒店',
+              client: '顺德联塑万怡酒店',
+              completionTime: '2017年10月',
+              description: '顺德联塑万怡酒店作为国际品牌万豪旗下的重要布局之一，对整体形象标识系统有着严格的设计与施工标准。本项目中，我们负责酒店主招牌及外立面标识系统的设计深化、结构制作与现场安装，确保品牌调性在本地实现高度还原。'
             }
           ]
         },
@@ -448,33 +418,32 @@ export default {
           type: '商业办公案例',
           cases: [
             {
-              id: 301,
-              title: '金融中心大厦顶层标识',
-              thumbImg: require('@/assets/images/about/beij3.jpg'),
+              id: 101,
+              title: '阳江盈信广场',
+              thumbImg: require('@/assets/images/xiangmuanli/yj.jpg'),
               images: [
-                require('@/assets/images/about/beij3.jpg'),
-                require('@/assets/images/about/beij3.jpg'),
-                require('@/assets/images/about/beij3.jpg')
+                require('@/assets/images/xiangmuanli/yj.jpg'),
+                require('@/assets/images/xiangmuanli/yj4.jpg'),
+                require('@/assets/images/xiangmuanli/yj3.jpg')
               ],
-              location: '上海市陆家嘴金融区',
-              client: '国际金融集团',
-              completionTime: '2024年2月',
-              description: '为金融中心大厦设计的顶层发光标识，高度位于320米的建筑顶端，需要考虑极端天气条件下的稳定性和维护便捷性。采用了航空级铝合金框架与超高亮度LED模组，配合远程监控系统，确保在各种条件下的正常运行。'
+              location: '广东省阳江市江城区东风三路',
+              client: '有限公司',
+              completionTime: '2018年2月',
+              description: '阳江盈信广场作为当地的重要商业地标，我们团队有幸参与了广场内外艺术装置的设计与施工工作。本次项目以“城市美学融合商业氛围”为核心理念，结合广场建筑风格和人流动线，定制了一系列富有视觉冲击力与互动感的艺术装置。装置材质上选用环保耐用的材料，结合灯光与造型设计，既满足了白天的观赏性，也增强了夜间的氛围感。整体设计不仅提升了盈信广场的整体调性，也成为市民拍照打卡的热门点位，为商业空间注入更多文化与艺术气息。本项目从创意提案、深化设计到现场安装，全程由我们团队独立完成，体现了我们在公共艺术与商业场景融合方面的专业能力。'
             },
             {
-              id: 302,
-              title: '创意产业园区导视系统',
-              thumbImg: require('@/assets/images/about/beij3.jpg'),
+              id: 103,
+              title: '欢乐海岸购物中心标识',
+              thumbImg: require('@/assets/images/xiangmuanli/hlha1.jpg'),
               images: [
-                require('@/assets/images/about/beij3.jpg'),
-                require('@/assets/images/about/beij3.jpg'),
-                require('@/assets/images/about/beij3.jpg'),
-                require('@/assets/images/about/beij3.jpg')
+                require('@/assets/images/xiangmuanli/hlha1.jpg'),
+                require('@/assets/images/xiangmuanli/hlha2.jpg'),
+                require('@/assets/images/xiangmuanli/hlha.jpg')
               ],
-              location: '北京市朝阳区798艺术区',
-              client: '创意空间管理有限公司',
-              completionTime: '2023年12月',
-              description: '为798艺术区内的创意产业园设计的整体导视系统，融合了工业风格与现代艺术元素，采用锈蚀钢板与LED光源相结合的方式，既保留了原有工业遗存的质感，又增添了现代科技感，形成独特的视觉标识。'
+              location: '欢乐海岸购物中心标识',
+              client: '欢乐海岸购物中心标识',
+              completionTime: '2020年12月',
+              description: '欢乐海岸购物中心作为集购物、美食、娱乐于一体的综合性商业体，对整体视觉导引系统有着高标准的设计要求。我们团队负责了整个项目的标识系统设计与制作安装，旨在打造一个美观、实用、统一的导视环境。本项目涵盖了入口主标识、楼层导向牌、功能区域指引、卫生间及停车场标识等多个模块。设计上，我们以“现代都市感+海岸元素”为创意基础，融合项目定位和建筑风格，整体色调清新明快，识别性强，既提升了购物中心的整体形象，也优化了顾客的动线体验。在制作与安装环节，我们选用了高强度金属结构与耐候性涂层材料，确保标识系统在高人流、高使用频率的商业环境中长期保持稳定与美观。整个项目从方案设计到落地执行，我们团队均保持高标准把控，体现了我们在商业标识系统工程中的专业能力和执行效率。'
             },
             {
               id: 303,
@@ -497,47 +466,17 @@ export default {
           cases: [
             {
               id: 401,
-              title: '中心医院医疗导视系统',
-              thumbImg: require('@/assets/images/about/beij3.jpg'),
+              title: '爱情邮局',
+              thumbImg: require('@/assets/images/xiangmuanli/aqyj.jpg'),
               images: [
-                require('@/assets/images/about/beij3.jpg'),
-                require('@/assets/images/about/beij3.jpg'),
-                require('@/assets/images/about/beij3.jpg'),
-                require('@/assets/images/about/beij3.jpg')
+                require('@/assets/images/xiangmuanli/aqyj1.jpg'),
+                require('@/assets/images/xiangmuanli/aqyj2.jpg'),
+                require('@/assets/images/xiangmuanli/aqyj.jpg')
               ],
-              location: '广州市天河区',
-              client: '广州中心医院',
+              location: '爱情邮局',
+              client: '爱情邮局',
               completionTime: '2023年10月',
-              description: '为广州中心医院设计的全院导视系统，包括门诊、住院、急诊等多个区域的标识与导航。系统采用了色彩编码分区设计，结合智能终端查询，大幅提升了患者的就医体验。所有标识材料均采用抗菌材质，符合医疗环境的特殊要求。'
-            },
-            {
-              id: 402,
-              title: '城市轨道交通标识系统',
-              thumbImg: require('@/assets/images/about/beij3.jpg'),
-              images: [
-                require('@/assets/images/about/beij3.jpg'),
-                require('@/assets/images/about/beij3.jpg'),
-                require('@/assets/images/about/beij3.jpg')
-              ],
-              location: '成都市地铁18号线',
-              client: '成都地铁集团',
-              completionTime: '2023年9月',
-              description: '为成都地铁18号线设计的全线标识系统，包括车站入口标识、方向指引、站台信息牌等多种形式。设计融入了成都地方文化元素，采用了耐候性强的材料与节能LED照明，确保长期使用的安全性与美观性。'
-            },
-            {
-              id: 403,
-              title: '体育中心赛事指示系统',
-              thumbImg: require('@/assets/images/about/beij3.jpg'),
-              images: [
-                require('@/assets/images/about/beij3.jpg'),
-                require('@/assets/images/about/beij3.jpg'),
-                require('@/assets/images/about/beij3.jpg'),
-                require('@/assets/images/about/beij3.jpg')
-              ],
-              location: '西安市雁塔区',
-              client: '陕西省体育局',
-              completionTime: '2024年3月',
-              description: '为西安体育中心设计的赛事指示系统，采用模块化设计，可根据不同赛事快速更换内容。系统结合了电子墨水屏与LED照明，既保证了信息的清晰度，又大幅降低了能耗。特别考虑了大客流疏散的需求，在紧急情况下可切换为应急指引模式。'
+              description: '爱情邮局'
             }
           ]
         },
@@ -546,15 +485,15 @@ export default {
           cases: [
             {
               id: 501,
-              title: '城市花园小区入口标识',
+              title: '佛山普君新城营销中心精神堡垒',
               thumbImg: require('@/assets/images/about/beij3.jpg'),
               images: [
                 require('@/assets/images/about/beij3.jpg'),
                 require('@/assets/images/about/beij3.jpg'),
                 require('@/assets/images/about/beij3.jpg')
               ],
-              location: '上海市松江区',
-              client: '绿城房地产开发有限公司',
+              location: '佛山普君新城营销中心精神堡垒',
+              client: '佛山普君新城营销中心精神堡垒',
               completionTime: '2023年11月',
               description: '为城市花园高端住宅小区设计的入口标识，采用了天然石材与铜板相结合的方式，体现项目的高端品质。夜间照明采用了隐藏式设计，营造出温馨而不张扬的氛围，同时考虑了周边居民的光污染问题，精确控制了光照角度与亮度。'
             },
@@ -653,7 +592,7 @@ export default {
   computed: {
     filteredCases() {
       const currentTabType = this.tabList[this.tabIndex].name;
-      const tabData = this.caseData.find(item => item.type === currentTabType) || { cases: [] };
+      const tabData = this.caseData.find(item => item.type === currentTabType) || {cases: []};
       return tabData.cases;
     },
     totalPages() {
@@ -685,7 +624,7 @@ export default {
     scrollToGallery() {
       const galleryContainer = document.querySelector('.gallery-container');
       if (galleryContainer) {
-        galleryContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        galleryContainer.scrollIntoView({behavior: 'smooth', block: 'start'});
       }
     },
 
@@ -703,14 +642,14 @@ export default {
       // 使用路由导航到详情页
       this.$router.push({
         name: 'CaseDetail',
-        params: { id: caseId },
-        query: { tab: tabIndex }
+        params: {id: caseId},
+        query: {tab: tabIndex}
       });
     },
 
     // Case detail modal methods
     openDetailModal(caseItem) {
-      this.currentCase = { ...caseItem };
+      this.currentCase = {...caseItem};
       this.currentImageIndex = 0;
       this.detailModalVisible = true;
       document.body.classList.add('no-scroll');
@@ -790,17 +729,29 @@ export default {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes modalFadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Transitions */
@@ -1335,24 +1286,26 @@ export default {
 
 .case-modal-content {
   background-color: #fff;
-  border-radius: 8px;
+  border-radius: 16px;
   width: 100%;
-  max-width: 1200px;
+  max-width: 90%;
   max-height: 90vh;
   position: relative;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12); /* 增强阴影深度提升层次感 */
+  border-radius: 20px; /* 调整为更圆润的20px圆角 */
   animation: modalFadeIn 0.3s ease-out;
 }
 
 .modal-close {
   position: absolute;
-  top: 15px;
-  right: 15px;
-  width: 40px;
-  height: 40px;
+  top: 24px;
+  right: 24px; /* 调整关闭按钮位置更协调 */
+  color: white;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.9);
+  background: linear-gradient(135deg, #2e4985 0%, #3d5788 100%); /* 采用ProductView的主题渐变 */
   border: none;
   cursor: pointer;
   display: flex;
@@ -1360,7 +1313,7 @@ export default {
   justify-content: center;
   z-index: 10;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);
 }
 
 .modal-close:hover {
@@ -1468,8 +1421,11 @@ export default {
 .case-modal-details {
   width: 100%;
   flex: 0 0 40%;
-  padding: 25px;
+  padding: 48px; /* 采用AboutView公司介绍区域的内边距标准 */
+  max-width: 680px; /* 扩大文字区域宽度提升内容展示 */
   overflow-y: auto;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%); /* 参考ProductView产品卡片的背景渐变 */
+  border-radius: 16px; /* 与模态框整体圆角保持一致 */
 }
 
 .case-title {
@@ -1490,7 +1446,8 @@ export default {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #555;
+  color: #334155; /* 采用ProductView元信息文字颜色 */
+  font-size: 0.95rem; /* 微调字体大小提升可读性 */
 }
 
 .meta-item svg {
@@ -1545,10 +1502,11 @@ export default {
 }
 
 .contact-btn {
-  background-color: #0078d4;
+  background: linear-gradient(90deg, #2e4985 0%, #3d5788 100%); /* 采用ProductView的主题渐变 */
   color: white;
   border: none;
   flex-grow: 1;
+  box-shadow: 0 4px 8px rgba(45, 71, 141, 0.2); /* 增加按钮阴影 */
 }
 
 .contact-btn:hover {

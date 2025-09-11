@@ -13,9 +13,10 @@ spring:
 #        password: admin123
 #        部署用
 #        url: jdbc:mysql://116.62.21.148:3306/portal?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false
-        url: jdbc:mysql://116.62.21.148:3306/portal?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+#        url: jdbc:mysql://116.62.21.148:3306/portal?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+        url: jdbc:mysql://8.134.118.189:3306/portal?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
         username: root
-        password: admin123
+        password: FsztMysql123.
         driver-class-name: com.mysql.cj.jdbc.Driver
 
 

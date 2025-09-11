@@ -4,7 +4,7 @@
     <section class="hero-section">
       <div class="container">
         <div class="company-header">
-          <h1 class="company-title">佛山钟潭装饰工程有限公司</h1>
+          <h1 class="company-title">佛山市钟潭装饰工程有限公司</h1>
           <div class="title-underline"></div>
           <p class="company-description">钟潭熟悉每种制作材料和制作工艺，擅长叠加使用放大您的品牌优势。钟潭坚持定制化原则，倾听您的需求，在任何时候都能给你提供专业的招牌和金属制品的意见和帮助，创建符合您期望要求的品牌标志。</p>
         </div>
@@ -26,7 +26,7 @@
               <h2 class="banner-title">定制化服务，首选钟潭装饰</h2>
               <div class="banner-divider"></div>
               <p class="banner-text">钟潭熟悉每种制作材料和制作工艺，擅长叠加使用放大您的品牌优势。钟潭坚持定制化原则，倾听您的需求，在任何时候都能给你提供专业的招牌和金属制品的意见和帮助，创建符合您期望要求的品牌标志。</p>
-              <button class="primary-btn">了解更多</button>
+              <router-link to="/about" class="primary-btn">了解更多</router-link>
             </div>
           </div>
         </div>
@@ -73,6 +73,7 @@
               v-for="(advantage, index) in advantageList"
               :key="index"
               class="advantage-card"
+              @click="goToAbout"
           >
             <div class="advantage-image-wrapper">
               <img :src="advantage.cover" :alt="advantage.title" class="advantage-image">
@@ -116,7 +117,7 @@
             <div class="service-divider"></div>
             <p class="service-description">{{service.desc}}</p>
             <div class="service-footer">
-              <a href="#" class="service-link">了解更多 <i class="am-icon-angle-right"></i></a>
+              <router-link to="/about" class="service-link">了解更多 <i class="am-icon-angle-right"></i></router-link>
             </div>
           </div>
         </div>
@@ -136,7 +137,6 @@
 
         <div class="contact-cta">
           <a href="tel:+8613078164038" class="primary-btn">立即咨询</a>
-<!--          <a href="ExampleView.vue" class="outline-btn">查看案例</a>-->
           <router-link to="/example" class="outline-btn">查看案例</router-link>
         </div>
       </div>
@@ -144,59 +144,62 @@
   </Layout>
 </template>
 
-<script>
-import Layout from "@/components/common/Layout";
-export default {
-  name: "IndexView",
-  components: { Layout },
-  data() {
-    return {
-      tabList: [
-        {name: '招牌定制', desc: '专业定制各类招牌', icon: 'am-icon-cog'},
-        {name: '质量保证', desc: '精工细作保证品质', icon: 'am-icon-lightbulb-o'},
-        {name: '安装使用', desc: '专业团队现场安装', icon: 'am-icon-line-chart'},
-        {name: '维修保养', desc: '长期售后维护保养', icon: 'am-icon-hourglass-end'},
-      ],
-      tabIndex: 0,
-      slideshow: [
-        { imageUrl: require('@/assets/images/about/beij1.jpg') },
-        { imageUrl: require('@/assets/images/about/beij2.jpg') },
-        { imageUrl: require('@/assets/images/about/beij3.jpg') },
-        { imageUrl: require('@/assets/images/about/beij4.jpg') }
-      ],
-      advantageList: [
-        {id: 1, cover: require('../assets/images/about/beij1.jpg'), title: '丰富的现场施工经验', desc: '公司拥有十余年的发展历程，积累了大量的实际施工经验，能够高效应对各种复杂的施工环境和挑战。'},
-        {id: 2, cover: require('../assets/images/about/beij2.jpg'), title: '专业的技术团队', desc: '公司拥有专业的技术团队，确保工程的高质量实施和创新性解决方案的提供。'},
-        {id: 3, cover: require('../assets/images/about/beij3.jpg'), title: '多元化的业务范围', desc: '公司承揽室内外装修、广告制作安装、钢结构安装、电力设备维护、不锈钢工程等多种业务，展现了全方位的服务能力。'},
-        {id: 4, cover: require('../assets/images/about/beij4.jpg'), title: '卓越的项目履历', desc: '公司完成了如南京青奥会室外大型配套广告安装工程、南方电网电力工程、龙建路桥钢结构安装工程等大型项目，证明了其在大型工程中的实力和信誉。'},
-      ],
-      serviceList: [
-        {id: 1, icon: 'am-icon-diamond', title: '招牌定制', desc: '提供超过300种素材方案，涵盖不锈钢、铝、亚克力等空间设计材质，可做不同效果的电镀、抛光、喷漆等流行要素，为客户创造广阔的创作空间，帮助实现营销展示导引等作用。'},
-        {id: 2, icon: 'am-icon-user', title: '质量保证', desc: '标牌制作生产基地位于佛山，拥有先进的雕刻机、激光切割机、开槽机、开料机、数控剪板机、折弯机等金属处理机械，无论是精细工艺处理还是大尺寸物料处理都能轻松应付。'},
-        {id: 3, icon: 'am-icon-umbrella', title: '安装使用', desc: '钟潭拥有专业安装维护团队，不需要额外寻找供应商，只需要向钟潭预约安装，安装维护团队准时到达，标价明确，无二次收费，按要求完成安装任务。'},
-        {id: 4, icon: 'am-icon-briefcase', title: '维修保养', desc: '设有保用教学，帮助您更能掌握使用产品，并在超过保修期之后仍提供有偿维修。在产品生命周期结束后，钟潭会提供优惠供客户重新定制以替旧换新。'}
-      ]
-    }
-  },
-  methods: {
-    changeTab(index) {
-      this.tabIndex = index
-    },
-    getSlideshow() {
-      // 如果需要从API获取幻灯片数据
-      this.getRequest("/findAllSlideshow").then(resp => {
-        if (resp) {
-          this.slideshow = resp.data.data
+  <script>
+    import Layout from "@/components/common/Layout";
+    export default {
+      name: "IndexView",
+      components: { Layout },
+      data() {
+        return {
+          tabList: [
+            {name: '招牌定制', desc: '专业定制各类招牌', icon: 'am-icon-cog'},
+            {name: '质量保证', desc: '精工细作保证品质', icon: 'am-icon-lightbulb-o'},
+            {name: '安装使用', desc: '专业团队现场安装', icon: 'am-icon-line-chart'},
+            {name: '维修保养', desc: '长期售后维护保养', icon: 'am-icon-hourglass-end'},
+          ],
+          tabIndex: 0,
+          slideshow: [
+            { imageUrl: require('@/assets/images/about/beij1.jpg') },
+            { imageUrl: require('@/assets/images/about/beij2.jpg') },
+            { imageUrl: require('@/assets/images/about/beij3.jpg') },
+            { imageUrl: require('@/assets/images/about/beij4.jpg') }
+          ],
+          advantageList: [
+            {id: 1, cover: require('../assets/images/about/beij1.jpg'), title: '丰富的现场施工经验', desc: '公司拥有十余年的发展历程，积累了大量的实际施工经验，能够高效应对各种复杂的施工环境和挑战。'},
+            {id: 2, cover: require('../assets/images/about/beij2.jpg'), title: '专业的技术团队', desc: '公司拥有专业的技术团队，确保工程的高质量实施和创新性解决方案的提供。'},
+            {id: 3, cover: require('../assets/images/about/beij3.jpg'), title: '多元化的业务范围', desc: '公司承揽室内外装修、广告制作安装、钢结构安装、不锈钢工程等多种业务，展现了全方位的服务能力。'},
+            {id: 4, cover: require('../assets/images/about/beij4.jpg'), title: '卓越的项目履历', desc: '公司完成了如南方电网电力工程、联塑集团安装工程等大型项目，证明了其在大型工程中的实力和信誉。'},
+          ],
+          serviceList: [
+            {id: 1, icon: 'am-icon-diamond', title: '招牌定制', desc: '提供超过300种素材方案，涵盖不锈钢、铝、亚克力等空间设计材质，可做不同效果的电镀、抛光、喷漆等流行要素，为客户创造广阔的创作空间，帮助实现营销展示导引等作用。'},
+            {id: 2, icon: 'am-icon-user', title: '质量保证', desc: '标牌制作生产基地位于佛山，拥有先进的雕刻机、激光切割机、开槽机、开料机、数控剪板机、折弯机等金属处理机械，无论是精细工艺处理还是大尺寸物料处理都能轻松应付。'},
+            {id: 3, icon: 'am-icon-umbrella', title: '安装使用', desc: '钟潭拥有专业安装维护团队，不需要额外寻找供应商，只需要向钟潭预约安装，安装维护团队准时到达，标价明确，无二次收费，按要求完成安装任务。'},
+            {id: 4, icon: 'am-icon-briefcase', title: '维修保养', desc: '设有保用教学，帮助您更能掌握使用产品，并在超过保修期之后仍提供有偿维修。在产品生命周期结束后，钟潭会提供优惠供客户重新定制以替旧换新。'}
+          ]
         }
-      })
+      },
+      methods: {
+        changeTab(index) {
+          this.tabIndex = index
+        },
+        goToAbout() {
+          this.$router.push('/about')
+        },
+        getSlideshow() {
+          // 如果需要从API获取幻灯片数据
+          this.getRequest("/findAllSlideshow").then(resp => {
+            if (resp) {
+              this.slideshow = resp.data.data
+            }
+          })
+        }
+      },
+      // 如果需要从API获取数据，请取消以下注释
+      // mounted() {
+      //   this.getSlideshow()
+      // }
     }
-  },
-  // 如果需要从API获取数据，请取消以下注释
-  // mounted() {
-  //   this.getSlideshow()
-  // }
-}
-</script>
+  </script>
 
 <style>
 /* 全局样式 */
@@ -539,6 +542,8 @@ a:hover {
   opacity: 0;
   transition: opacity var(--transition-normal) ease;
 }
+
+
 
 .overlay-icon {
   color: white;

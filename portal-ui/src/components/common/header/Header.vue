@@ -19,7 +19,7 @@
           <i class="contact-icon am-icon-map-marker"></i>
           <div class="item">
             <strong>广东省佛山市南海区</strong>
-            <span>佛山钟潭装饰工程有限公司</span>
+            <span>佛山市钟潭装饰工程有限公司</span>
           </div>
         </div>
       </div>
@@ -89,7 +89,7 @@
           <!-- 公司信息区域 -->
           <div class="mobile-company-info">
             <img :src="require('@/assets/images/index/log.jpg')" alt="公司logo" class="mobile-company-logo">
-            <h3>佛山钟潭装饰工程有限公司</h3>
+            <h3>佛山市钟潭装饰工程有限公司</h3>
           </div>
 
           <!-- 导航菜单 -->

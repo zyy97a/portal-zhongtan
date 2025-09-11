@@ -1,43 +1,45 @@
 <template>
   <Layout>
-    <div class="gallery-box" v-if="title && photos.length">
-      <div class="layout-container">
-        <div class="solution-page">
-          <div class="container">
-            <h2>{{ title }}</h2>
-            <p>{{ introduction }}</p>
-          </div>
+    <div class="gallery-section" v-if="title && photos.length">
+      <div class="gallery-header">
+        <div class="container">
+          <h2 class="gallery-title">{{ title }}</h2>
+          <p class="gallery-intro">{{ introduction }}</p>
         </div>
       </div>
 
-      <div class="gallery">
+      <div class="gallery-container">
         <div
-            class="active-photo"
+            class="featured-image"
             :style="{ backgroundImage: 'url(' + photos[activePhoto] + ')' }"
         >
-          <button
-              type="button"
-              aria-label="Previous Photo"
-              class="previous"
-              @click="previousPhoto"
-          >
-            ◀
-          </button>
-          <button
-              type="button"
-              aria-label="Next Photo"
-              class="next"
-              @click="nextPhoto"
-          >
-            ▶
-          </button>
+          <div class="navigation-controls">
+            <button
+                type="button"
+                aria-label="Previous Photo"
+                class="nav-button prev-button"
+                @click="previousPhoto"
+            >
+              <span class="nav-icon">❮</span>
+            </button>
+            <button
+                type="button"
+                aria-label="Next Photo"
+                class="nav-button next-button"
+                @click="nextPhoto"
+            >
+              <span class="nav-icon">❯</span>
+            </button>
+          </div>
+          <div class="photo-counter">{{ activePhoto + 1 }} / {{ photos.length }}</div>
         </div>
-        <div class="thumbnails">
+
+        <div class="thumbnail-container">
           <div
               v-for="(photo, index) in photos"
               :key="index"
               @click="activePhoto = index"
-              :class="{ active: activePhoto === index }"
+              :class="['thumbnail', { active: activePhoto === index }]"
               :style="{ backgroundImage: 'url(' + photo + ')' }"
           ></div>
         </div>
@@ -102,84 +104,185 @@ export default {
   outline: none;
 }
 
-.gallery-box {
+.gallery-section {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: auto;
-  text-align: center;
-  width: 100%;
+  padding: 40px 0;
+  background-color: #f8f9fa;
 }
 
-.gallery-box .gallery {
+.gallery-header {
   width: 100%;
-  max-width: 900px;
+  max-width: 1200px;
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 0 20px;
+}
+
+.gallery-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 16px;
+  position: relative;
+  display: inline-block;
+}
+
+.gallery-title:after {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 4px;
+  background-color: #59bcdb;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+.gallery-intro {
+  font-size: 1.1rem;
+  color: #666;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.gallery-container {
+  width: 100%;
+  max-width: 1000px;
   display: flex;
   flex-direction: column;
   background-color: #fff;
-  padding: 8px;
-  border-radius: 8px;
-  margin-bottom: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin: 0 20px 40px;
 }
 
-.gallery-box .gallery .active-photo {
+.featured-image {
   width: 100%;
-  padding-bottom: 65%;
+  padding-bottom: 60%;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
-  border: 2px solid #fff;
-  margin-bottom: 10px;
+  transition: all 0.3s ease;
 }
 
-.gallery-box .gallery .active-photo button {
-  border: none;
-  background: transparent;
-  font-size: 30px;
-  color: #59bcdb;
-  opacity: 0.5;
-  cursor: pointer;
+.navigation-controls {
   position: absolute;
   top: 0;
-  height: 100%;
-  width: 15%;
-  transition: opacity 0.2s;
-}
-
-.gallery-box .gallery .active-photo button:hover {
-  opacity: 0.9;
-}
-
-.gallery-box .gallery .active-photo .previous {
   left: 0;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.3), transparent);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.gallery-box .gallery .active-photo .next {
-  right: 0;
-  background: linear-gradient(to left, rgba(0, 0, 0, 0.3), transparent);
-}
-
-.gallery-box .gallery .thumbnails {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-  grid-gap: 6px;
-}
-
-.thumbnails div {
-  border: 2px solid #fff;
-  outline: 2px solid #fff;
+.nav-button {
+  background: transparent;
+  border: none;
   cursor: pointer;
-  padding-bottom: 65%;
+  height: 100%;
+  width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.prev-button {
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.4), transparent);
+}
+
+.next-button {
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.4), transparent);
+}
+
+.nav-icon {
+  font-size: 2.5rem;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  opacity: 0.7;
+  transition: all 0.2s ease;
+}
+
+.nav-button:hover .nav-icon {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.photo-counter {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.thumbnail-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  grid-gap: 8px;
+  padding: 16px;
+  background-color: #fff;
+}
+
+.thumbnail {
+  padding-bottom: 70%;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  transition: outline-color 0.3s, opacity 0.3s;
+  cursor: pointer;
+  border-radius: 6px;
+  border: 3px solid transparent;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.thumbnails .active {
-  outline-color: #59bcdb;
-  opacity: 0.6;
+.thumbnail:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.thumbnail.active {
+  border-color: #59bcdb;
+}
+
+.thumbnail.active:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(89, 188, 219, 0.3);
+}
+
+@media (max-width: 768px) {
+  .gallery-title {
+    font-size: 2rem;
+  }
+
+  .gallery-intro {
+    font-size: 1rem;
+  }
+
+  .thumbnail-container {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  }
+
+  .nav-icon {
+    font-size: 2rem;
+  }
 }
 </style>

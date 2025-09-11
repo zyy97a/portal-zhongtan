@@ -3,33 +3,54 @@
     <!-- 优化后的全宽页面顶部英雄区域 -->
     <div class="hero-section">
       <div class="hero-background"></div>
+      <div class="hero-pattern-overlay"></div>
       <div class="container">
         <div class="hero-content">
+          <span class="hero-badge">佛山市钟潭装饰工程有限公司</span>
           <h1 class="hero-title">关于我们</h1>
           <div class="title-underline"></div>
           <p class="hero-description">质量第一、用户至上、以质兴业、以优取胜</p>
+          <p class="hero-description-en">Quality first and customer foremost; developing the industry through quality and achieving success through excellence.</p>
           <div class="hero-cta">
-            <router-link to="/contact" class="hero-button">联系我们</router-link>
+            <a href="tel:+8613078164038" class="hero-button">联系我们</a>
+            <router-link to="/example" class="hero-button-secondary">查看项目 <i class="hero-arrow-icon">→</i></router-link>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-number">10+</span>
+              <span class="stat-label">年行业经验</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">100+</span>
+              <span class="stat-label">成功项目</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">50+</span>
+              <span class="stat-label">合作企业</span>
+            </div>
           </div>
         </div>
       </div>
+      <!--      <div class="hero-scroll-indicator">
+              <div class="scroll-icon"></div>
+              <span class="scroll-text">向下滚动探索更多</span>
+            </div>-->
     </div>
-
-<!--    &lt;!&ndash; Breadcrumb &ndash;&gt;
-    <div class="breadcrumb-container">
-      <div class="container">
-        <ol class="breadcrumb">
-          <li><router-link to="/">首页</router-link></li>
-          <li class="active">关于我们</li>
-        </ol>
-      </div>
-    </div>-->
+    <!--    &lt;!&ndash; Breadcrumb &ndash;&gt;
+        <div class="breadcrumb-container">
+          <div class="container">
+            <ol class="breadcrumb">
+              <li><router-link to="/">首页</router-link></li>
+              <li class="active">关于我们</li>
+            </ol>
+          </div>
+        </div>-->
 
     <!-- 公司介绍区域 -->
     <div class="company-section">
       <div class="container">
         <div class="section-header">
-          <h2 class="section-title">{{companyInfo.name || '佛山钟潭装饰工程有限公司'}}</h2>
+          <h2 class="section-title">{{companyInfo.name || '佛山市钟潭装饰工程有限公司'}}</h2>
           <div class="section-description" v-if="companyInfo.introduction">
             <p>{{companyInfo.introduction}}</p>
           </div>
@@ -39,14 +60,14 @@
           <div class="company-info-row">
             <div class="company-info-col">
               <div class="company-info-text">
-<!--                <h3 class="company-name">佛山钟潭装饰工程有限公司</h3>-->
+                <!--                <h3 class="company-name">佛山钟潭装饰工程有限公司</h3>-->
                 <div class="company-description">
                   <h2>公司简介</h2>
                   <p>
-                    佛山市钟潭装饰工程有限公司的前身是一支具有高度专业素养的装饰施工工程队，经过十余年的稳步发展与不断积累，已逐步成长为一家集设计、施工、维护于一体的综合型装饰工程企业。公司自成立以来，始终秉持“诚信为本、质量至上、客户满意”的经营理念，凭借丰富的现场施工管理经验和精湛的技术力量，赢得了广大客户的一致认可与良好口碑。
+                    佛山市钟潭装饰工程有限公司的前身是一支具有高度专业素养的装饰施工工程队，经过十余年的稳步发展与不断积累，已逐步成长为一家集设计、施工、维护于一体的综合型装饰工程企业。公司自成立以来，始终秉持"诚信为本、质量至上、客户满意"的经营理念，凭借丰富的现场施工管理经验和精湛的技术力量，赢得了广大客户的一致认可与良好口碑。
                   </p>
                   <p>
-                    公司业务范围广泛，主要承接各类室内外装修装饰工程，涵盖住宅、商业空间、办公场所、厂房等多种类型，同时在广告制作与安装、钢结构工程、不锈钢工程、电力设备维护等多个领域拥有成熟的解决方案和成功案例。无论是精细化的空间设计，还是高强度的工程施工，公司均能提供一站式、个性化、高品质的服务。
+                    公司业务范围广泛，主要承接各类室内外装修装饰工程，涵盖住宅、商业空间、办公场所、厂房等多种类型，同时在广告制作与安装、钢结构工程、不锈钢工程等多个领域拥有成熟的解决方案和成功案例。无论是精细化的空间设计，还是高强度的工程施工，公司均能提供一站式、个性化、高品质的服务。
                   </p>
                   <p>
                     我们拥有一支经验丰富、技术过硬的专业团队，具备高效的项目执行能力和良好的协作精神，能够在确保安全与质量的前提下，高效完成各类工程项目。未来，佛山市钟潭装饰工程有限公司将继续以客户需求为导向，以技术创新为驱动，致力于为更多客户打造安全、美观、实用的优质空间环境，推动企业不断迈向更高的发展阶段。
@@ -241,7 +262,9 @@ export default {
 /* 优化后的全宽英雄区域 */
 .hero-section {
   position: relative;
-  height: 500px;
+  height: 100vh; /* 使用视口高度使其更壮观 */
+  min-height: 600px; /* 确保最小高度 */
+  max-height: 800px; /* 最大高度限制，适合各种屏幕 */
   width: 100%;
   overflow: hidden;
   display: flex;
@@ -261,6 +284,21 @@ export default {
   background-position: center;
   background-attachment: fixed;
   z-index: -2;
+  transform: scale(1.05); /* 轻微放大背景图，增强视觉冲击 */
+  animation: slowZoom 20s infinite alternate; /* 缓慢缩放动画 */
+}
+
+
+
+.hero-pattern-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.8;
+  z-index: -1;
 }
 
 .hero-section::before {
@@ -270,67 +308,237 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.3) 100%);
   z-index: -1;
 }
-
 .hero-content {
-  max-width: 650px;
+  max-width: 750px;
   padding: 30px 0;
   position: relative;
   z-index: 1;
+  animation: fadeIn 1.5s ease;
+}
+
+.hero-badge {
+  display: inline-block;
+  background-color: rgba(240, 165, 0, 0.2);
+  color: #f0a500;
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(240, 165, 0, 0.3);
+  animation: fadeInDown 1s ease;
+  backdrop-filter: blur(5px);
 }
 
 .hero-title {
-  font-size: 48px;
-  font-weight: 700;
+  font-size: 60px;
+  font-weight: 800;
   margin: 0 0 15px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  animation: fadeInDown 1s ease;
+  animation: fadeInDown 1s ease 0.2s both;
+  position: relative;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
-
 .title-underline {
-  width: 80px;
-  height: 4px;
-  background: linear-gradient(90deg, #f0a500, #f5b461);
+  width: 100px;
+  height: 5px;
+  background: linear-gradient(90deg, #f0a500, rgba(245, 180, 97, 0.6));
   margin-bottom: 25px;
-  animation: fadeInLeft 1s ease 0.3s both;
+  animation: widthGrow 1s ease 0.4s both;
+  border-radius: 3px;
+  box-shadow: 0 2px 5px rgba(240, 165, 0, 0.3);
 }
 
 .hero-description {
-  font-size: 20px;
+  font-size: 24px;
   line-height: 1.6;
-  margin: 0 0 30px;
+  margin: 0 0 15px;
   opacity: 0.9;
   animation: fadeInUp 1s ease 0.6s both;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  font-weight: 500;
+}
+
+.hero-description-en {
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0 0 30px;
+  opacity: 0.7;
+  animation: fadeInUp 1s ease 0.8s both;
+  font-style: italic;
+  font-weight: 300;
 }
 
 .hero-cta {
-  animation: fadeInUp 1s ease 0.9s both;
+  animation: fadeInUp 1s ease 1s both;
+  display: flex;
+  gap: 20px;
+  margin-bottom: 50px;
 }
 
 .hero-button {
   display: inline-block;
-  padding: 12px 30px;
+  padding: 15px 35px;
   background: linear-gradient(90deg, #f0a500, #f5b461);
   color: #fff;
   font-size: 16px;
   font-weight: 600;
   text-decoration: none;
-  border-radius: 4px;
+  border-radius: 50px;
   transition: all 0.3s ease;
   border: none;
   cursor: pointer;
   text-transform: uppercase;
   letter-spacing: 1px;
-  box-shadow: 0 4px 15px rgba(240, 165, 0, 0.3);
+  box-shadow: 0 6px 20px rgba(240, 165, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: all 0.6s ease;
 }
 
 .hero-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(240, 165, 0, 0.5);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(240, 165, 0, 0.5);
 }
+
+
+.hero-button:hover::before {
+  left: 100%;
+}
+
+.hero-button-secondary {
+  display: inline-block;
+  padding: 15px 35px;
+  background: transparent;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  backdrop-filter: blur(5px);
+}
+
+.hero-button-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.hero-arrow-icon {
+  margin-left: 8px;
+  transition: transform 0.3s ease;
+  display: inline-block;
+  font-style: normal;
+}
+
+.hero-button-secondary:hover .hero-arrow-icon {
+  transform: translateX(5px);
+}
+
+.hero-stats {
+  display: flex;
+  gap: 40px;
+  margin-top: 30px;
+  animation: fadeInUp 1s ease 1.2s both;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px 25px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+  transform: translateY(-5px);
+  background-color: rgba(240, 165, 0, 0.2);
+  border-color: rgba(240, 165, 0, 0.3);
+}
+
+
+.stat-number {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 5px;
+  background: linear-gradient(90deg, #f0a500, #f5b461);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.8);
+  animation: fadeInUp 1s ease 1.4s both, bounce 2s infinite 2s;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.scroll-icon {
+  width: 30px;
+  height: 50px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 25px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.scroll-icon::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  background-color: #fff;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  animation: scrollDown 2s infinite;
+}
+
+.scroll-text {
+  font-size: 12px;
+  letter-spacing: 1px;
+  opacity: 0.7;
+}
+
 
 /* Breadcrumb */
 .breadcrumb-container {
@@ -727,10 +935,19 @@ export default {
 }
 
 /* 动画关键帧 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @keyframes fadeInDown {
   from {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-30px);
   }
   to {
     opacity: 1;
@@ -741,7 +958,7 @@ export default {
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -749,29 +966,61 @@ export default {
   }
 }
 
-@keyframes fadeInLeft {
+@keyframes widthGrow {
   from {
-    opacity: 0;
-    transform: translateX(-20px);
+    width: 0;
   }
   to {
-    opacity: 1;
-    transform: translateX(0);
+    width: 100px;
   }
 }
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0) translateX(-50%);
+  }
+  40% {
+    transform: translateY(-10px) translateX(-50%);
+  }
+  60% {
+    transform: translateY(-5px) translateX(-50%);
+  }
+}
+
+@keyframes scrollDown {
+  0% {
+    opacity: 1;
+    top: 8px;
+  }
+  100% {
+    opacity: 0;
+    top: 32px;
+  }
+}
+
+@keyframes slowZoom {
+  from {
+    transform: scale(1.05);
+  }
+  to {
+    transform: scale(1.15);
+  }
+}
+
 
 /* 响应式适配 */
 @media (max-width: 992px) {
   .hero-section {
-    height: 400px;
+    height: 85vh;
+    min-height: 550px;
   }
 
   .hero-title {
-    font-size: 36px;
+    font-size: 48px;
   }
 
   .hero-description {
-    font-size: 18px;
+    font-size: 20px;
   }
 
   .hero-button {
@@ -795,24 +1044,37 @@ export default {
   .partner-title {
     font-size: 18px;
   }
+
+
+
+
+  .hero-stats {
+    gap: 20px;
+  }
+
+  .stat-item {
+    padding: 12px 20px;
+  }
+
 }
 
 @media (max-width: 768px) {
   .hero-section {
-    height: 350px;
+    height: 80vh;
+    min-height: 500px;
   }
 
   .hero-title {
-    font-size: 32px;
+    font-size: 40px;
   }
 
   .section-title {
     font-size: 24px;
   }
 
+
   .hero-description {
-    font-size: 16px;
-    margin-bottom: 20px;
+    font-size: 18px;
   }
 
   .hero-button {
@@ -842,24 +1104,53 @@ export default {
   .company-description h2 {
     font-size: 1.5rem;
   }
+
+
+
+  .hero-cta {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+
+  .hero-button, .hero-button-secondary {
+    padding: 12px 25px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-stats {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .stat-item {
+    flex: 0 0 calc(50% - 10px);
+    margin-bottom: 15px;
+  }
+
 }
 
 @media (max-width: 576px) {
   .hero-section {
-    height: 300px;
+    height: auto;
+    min-height: 450px;
+    padding: 60px 0;
   }
 
+
   .hero-title {
-    font-size: 28px;
+    font-size: 32px;
   }
 
   .title-underline {
+    width: 70px;
+    height: 4px;
     margin-bottom: 15px;
   }
 
   .hero-description {
-    font-size: 14px;
-    margin-bottom: 15px;
+    font-size: 16px;
   }
 
   .section-title {
@@ -893,6 +1184,31 @@ export default {
   .partner-title {
     font-size: 18px;
     margin-bottom: 15px;
+  }
+
+
+
+  .hero-description-en {
+    font-size: 14px;
+  }
+
+
+
+  .hero-badge {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  .stat-number {
+    font-size: 24px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+  }
+
+  .hero-scroll-indicator {
+    display: none;
   }
 }
 
